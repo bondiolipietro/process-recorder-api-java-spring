@@ -15,13 +15,22 @@ import java.sql.Statement;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
+
     private static final String SQL_CREATE = "INSERT INTO user_account(user_id, first_name, last_name, email, " +
             "password)" +
             " VALUES(NEXTVAL('user_seq'), ?, ?, ?, ?)";
     private static final String SQL_COUNT_BY_EMAIL = "SELECT COUNT(*) FROM user_account WHERE email = ?";
     private static final String SQL_FIND_BY_ID = "SELECT * FROM user_account WHERE user_id = ?";
     private static final String SQL_FIND_BY_EMAIL = "SELECT * FROM user_account WHERE email = ?";
-
+    private final RowMapper<User> userRowMapper = ((rs, rowNum) -> {
+        return new User(
+                rs.getInt("user_id"),
+                rs.getString("first_name"),
+                rs.getString("last_name"),
+                rs.getString("email"),
+                rs.getString("password")
+        );
+    });
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -31,7 +40,7 @@ public class UserRepositoryImpl implements UserRepository {
         try {
             KeyHolder keyHolder = new GeneratedKeyHolder();
             jdbcTemplate.update(connection -> {
-                PreparedStatement ps  = connection.prepareStatement(SQL_CREATE, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement ps = connection.prepareStatement(SQL_CREATE, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, firstName);
                 ps.setString(2, lastName);
                 ps.setString(3, email);
@@ -39,7 +48,8 @@ public class UserRepositoryImpl implements UserRepository {
                 return ps;
             }, keyHolder);
             return (Integer) keyHolder.getKeys().get("user_id");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new PsAuthException("Invalid details. Failed to create account");
         }
     }
@@ -47,7 +57,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findByEmailAndPassword(String email, String password) throws PsAuthException {
         User user = jdbcTemplate.queryForObject(SQL_FIND_BY_EMAIL, userRowMapper, email);
-        if(!BCrypt.checkpw(password, user.getPassword())) {
+        if (!BCrypt.checkpw(password, user.getPassword())) {
             throw new PsAuthException("Invalid email or password");
         }
         return user;
@@ -63,13 +73,4 @@ public class UserRepositoryImpl implements UserRepository {
         return jdbcTemplate.queryForObject(SQL_FIND_BY_ID, userRowMapper, userId);
     }
 
-    private RowMapper<User> userRowMapper = ((rs, rowNum) -> {
-        return new User(
-                rs.getInt("user_id"),
-                rs.getString("first_name"),
-                rs.getString("last_name"),
-                rs.getString("email"),
-                rs.getString("password")
-        );
-    });
 }

@@ -4,6 +4,7 @@ import br.com.pietrobondioli.processstorageapi.domain.User;
 import br.com.pietrobondioli.processstorageapi.exceptions.PsAuthException;
 
 public interface UserRepository {
+
     Integer create(String firstName, String lastName, String email, String password) throws PsAuthException;
 
     User findByEmailAndPassword(String email, String password) throws PsAuthException;
@@ -11,4 +12,5 @@ public interface UserRepository {
     Integer getCountByEmail(String email);
 
     User findById(Integer userId);
+
 }

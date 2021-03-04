@@ -1,6 +1,7 @@
 package br.com.pietrobondioli.processstorageapi.domain;
 
 public class User {
+
     private Integer userId;
     private String firstName;
     private String lastName;
@@ -54,4 +55,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
