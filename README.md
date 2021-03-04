@@ -31,6 +31,34 @@ psql -U postgres --file processstorage_db.sql
 6. Open the project on your IDE (IntelliJ, NetBeans, etc).
 7. Click to run the code.
 
+## Documentation - Api Routes
+### Register - POST
+#### Route: 
+```
+/api/users/register
+```
+#### Body:
+```
+{
+  "firstName": "user", // varchar(24)
+  "lastName": "user", // varchar(48)
+  "email": "user@domain.com", // varchar(64)
+  "password": "password" // varchar(64)
+}
+```
+### Login - POST
+#### Route: 
+```
+/api/users/login
+```
+#### Body:
+```
+{
+  "email": "user@domain.com", // varchar(64)
+  "password": "password" // varchar(64)
+}
+```
+
 ## Author
 - Pietro Bondioli ([@bondiolipietro](https://github.com/bondiolipietro))
 
