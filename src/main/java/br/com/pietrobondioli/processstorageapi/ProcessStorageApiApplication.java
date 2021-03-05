@@ -20,6 +20,6 @@ public class ProcessStorageApiApplication {
         registrationBean.setFilter(authFilter);
         registrationBean.addUrlPatterns("/api/processes/*");
         return registrationBean;
-    };
+    }
 
 }

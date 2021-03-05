@@ -32,7 +32,7 @@ psql -U postgres --file processstorage_db.sql
 7. Click to run the code.
 
 ## Documentation - Api Routes
-### Register - POST
+### User - Register - POST
 #### Route: 
 ```
 /api/users/register
@@ -46,7 +46,8 @@ psql -U postgres --file processstorage_db.sql
   "password": "password" // varchar(64)
 }
 ```
-### Login - POST
+
+### User - Login - POST
 #### Route: 
 ```
 /api/users/login
@@ -58,6 +59,49 @@ psql -U postgres --file processstorage_db.sql
   "password": "password" // varchar(64)
 }
 ```
+
+### Process - Create - POST
+#### Route:
+```
+/api/processes/create
+```
+#### Notes:
+- Needs Auth token
+#### Body:
+```
+{
+    "firstName": "user",
+    "lastName": "user",
+    "cpf": "111.111.111-11",
+    "email": "user@domain.com",
+    "folder": 1,
+    "receipt": "1111111111",
+    "receiptIssueDate": "1111-11-11",
+    "address": "adress",
+    "district": "district",
+    "city": "city",
+    "state": "state",
+    "country": "country",
+    "cep": "11111-111",
+    "notes": "notes notes notes notes notes"
+}
+```
+
+### Process - Find By Id - GET
+#### Route:
+```
+/api/processes/{processId}
+```
+#### Notes:
+- Needs Auth token
+
+### Process - Fetch All - POST
+#### Route:
+```
+/api/processes
+```
+#### Notes:
+- Needs Auth token
 
 ## Author
 - Pietro Bondioli ([@bondiolipietro](https://github.com/bondiolipietro))
