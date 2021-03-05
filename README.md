@@ -95,7 +95,7 @@ psql -U postgres --file processstorage_db.sql
 #### Notes:
 - Needs Auth token
 
-### Process - Fetch All - POST
+### Process - Fetch All - GET
 #### Route:
 ```
 /api/processes
