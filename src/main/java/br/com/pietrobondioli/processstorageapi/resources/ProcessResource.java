@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,37 +32,26 @@ public class ProcessResource {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Process> createProcess(@RequestBody Map<String, Object> processMap) throws ParseException {
-        String firstName = (String) processMap.get("firstName");
-        String lastName = (String) processMap.get("lastName");
-        String cpf = (String) processMap.get("cpf");
-        String email = (String) processMap.get("email");
-        int folder = (Integer) processMap.get("folder");
-        String receipt = (String) processMap.get("receipt");
-        String receiptIssueDate = (String) processMap.get("receiptIssueDate");
-        String address = (String) processMap.get("address");
-        String district = (String) processMap.get("district");
-        String city = (String) processMap.get("city");
-        String state = (String) processMap.get("state");
-        String country = (String) processMap.get("country");
-        String cep = (String) processMap.get("cep");
-        String notes = (String) processMap.get("notes");
+    public ResponseEntity<Integer> createProcess(@RequestBody Process process) throws ParseException {
+        Integer processId = processService.createProcess(process);
 
-        Process process = processService.createProcess(firstName,
-                                                       lastName,
-                                                       cpf,
-                                                       email,
-                                                       folder,
-                                                       receipt,
-                                                       receiptIssueDate,
-                                                       address,
-                                                       district,
-                                                       city,
-                                                       state,
-                                                       country,
-                                                       cep,
-                                                       notes);
+        return new ResponseEntity<>(processId, HttpStatus.CREATED);
+    }
 
-        return new ResponseEntity<>(process, HttpStatus.CREATED);
+    @PutMapping("/update/{processId}")
+    public ResponseEntity<Map<String, Boolean>> updateProcess(@PathVariable("processId") Integer processId,
+                                                              @RequestBody Process process) {
+        processService.updateProcess(processId, process);
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("success", true);
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{processId}")
+    public ResponseEntity<Map<String, Boolean>> deleteProcess(@PathVariable("processId") Integer processId) {
+        processService.deleteProcess(processId);
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("success", true);
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 }

@@ -4,12 +4,10 @@ import br.com.pietrobondioli.processstorageapi.domain.Process;
 import br.com.pietrobondioli.processstorageapi.exceptions.PsBadRequestException;
 import br.com.pietrobondioli.processstorageapi.exceptions.PsResourceNotFoundException;
 import br.com.pietrobondioli.processstorageapi.repositories.ProcessRepository;
-import br.com.pietrobondioli.processstorageapi.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
 
@@ -31,60 +29,18 @@ public class ProcessServiceImpl implements ProcessService {
     }
 
     @Override
-    public Process createProcess(String firstName,
-                                 String lastName,
-                                 String cpf,
-                                 String email,
-                                 Integer folder,
-                                 String receipt,
-                                 String receiptIssueDate,
-                                 String address,
-                                 String district,
-                                 String city,
-                                 String state,
-                                 String country,
-                                 String cep,
-                                 String notes) throws PsBadRequestException, ParseException {
-        Date receiptIssueDateConverted = DataUtil.convertStringToSqlDate(receiptIssueDate);
-        int processId = processRepository.create(firstName,
-                                                  lastName,
-                                                  cpf,
-                                                  email,
-                                                  folder,
-                                                  receipt,
-                                                  receiptIssueDateConverted,
-                                                  address,
-                                                  district,
-                                                  city,
-                                                  state,
-                                                  country,
-                                                  cep,
-                                                  notes);
-        return processRepository.findById(processId);
+    public Integer createProcess(Process process) throws PsBadRequestException, ParseException {
+        return processRepository.create(process);
     }
 
     @Override
-    public void updateProcess(Integer processId,
-                              String firstName,
-                              String lastName,
-                              String cpf,
-                              String email,
-                              Integer folder,
-                              String receipt,
-                              String receiptIssueDate,
-                              String address,
-                              String district,
-                              String city,
-                              String state,
-                              String country,
-                              String cep,
-                              String notes) throws PsBadRequestException {
-
+    public void updateProcess(Integer processId, Process process) throws PsBadRequestException {
+        processRepository.update(processId, process);
     }
 
     @Override
     public void deleteProcess(Integer processId) throws PsResourceNotFoundException {
-
+        processRepository.delete(processId);
     }
 
 }

@@ -22,7 +22,15 @@ public class UserRepositoryImpl implements UserRepository {
     private static final String SQL_COUNT_BY_EMAIL = "SELECT COUNT(*) FROM user_account WHERE email = ?;";
     private static final String SQL_FIND_BY_ID = "SELECT * FROM user_account WHERE user_id = ?;";
     private static final String SQL_FIND_BY_EMAIL = "SELECT * FROM user_account WHERE email = ?;";
-
+    private final RowMapper<User> userRowMapper = ((rs, rowNum) -> {
+        return new User(
+                rs.getInt("user_id"),
+                rs.getString("first_name"),
+                rs.getString("last_name"),
+                rs.getString("email"),
+                rs.getString("password")
+        );
+    });
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -65,13 +73,4 @@ public class UserRepositoryImpl implements UserRepository {
         return jdbcTemplate.queryForObject(SQL_FIND_BY_ID, userRowMapper, userId);
     }
 
-    private final RowMapper<User> userRowMapper = ((rs, rowNum) -> {
-        return new User(
-                rs.getInt("user_id"),
-                rs.getString("first_name"),
-                rs.getString("last_name"),
-                rs.getString("email"),
-                rs.getString("password")
-        );
-    });
 }

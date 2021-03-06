@@ -1,22 +1,27 @@
 package br.com.pietrobondioli.processstorageapi.domain;
 
+import br.com.pietrobondioli.processstorageapi.util.DateUtil;
+
+import java.sql.Date;
+import java.text.ParseException;
+
 public class Process {
 
     private Integer processId;
-    private String firstName;
-    private String lastName;
-    private String cpf;
-    private String email;
-    private Integer folder;
-    private String receipt;
-    private String receiptIssueDate;
-    private String address;
-    private String district;
-    private String city;
-    private String state;
-    private String country;
-    private String cep;
-    private String notes;
+    private String firstName = "";
+    private String lastName = "";
+    private String cpf = "";
+    private String email = "";
+    private Integer folder = 0;
+    private String receipt = "";
+    private String receiptIssueDate = "";
+    private String address = "";
+    private String district = "";
+    private String city = "";
+    private String state = "";
+    private String country = "";
+    private String cep = "";
+    private String notes = "";
 
     public Process(Integer processId,
                    String firstName,
@@ -106,8 +111,8 @@ public class Process {
         this.receipt = receipt;
     }
 
-    public String getReceiptIssueDate() {
-        return receiptIssueDate;
+    public Date getReceiptIssueDate() throws ParseException {
+        return DateUtil.convertStringToSqlDate(receiptIssueDate);
     }
 
     public void setReceiptIssueDate(String receiptIssueDate) {

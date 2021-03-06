@@ -13,36 +13,10 @@ public interface ProcessService {
 
     Process fetchProcessById(Integer processId) throws PsResourceNotFoundException;
 
-    Process createProcess(String firstName,
-                          String lastName,
-                          String cpf,
-                          String email,
-                          Integer folder,
-                          String receipt,
-                          String receiptIssueDate,
-                          String address,
-                          String district,
-                          String city,
-                          String state,
-                          String country,
-                          String cep,
-                          String notes) throws PsBadRequestException, ParseException;
+    Integer createProcess(Process process) throws PsBadRequestException, ParseException;
 
     void updateProcess(Integer processId,
-                       String firstName,
-                       String lastName,
-                       String cpf,
-                       String email,
-                       Integer folder,
-                       String receipt,
-                       String receiptIssueDate,
-                       String address,
-                       String district,
-                       String city,
-                       String state,
-                       String country,
-                       String cep,
-                       String notes) throws PsBadRequestException;
+                       Process process) throws PsBadRequestException;
 
     void deleteProcess(Integer processId) throws PsResourceNotFoundException;
 

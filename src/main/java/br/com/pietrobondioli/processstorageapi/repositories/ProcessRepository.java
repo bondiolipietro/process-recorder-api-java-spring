@@ -13,36 +13,9 @@ public interface ProcessRepository {
 
     Process findById(Integer processId) throws PsResourceNotFoundException;
 
-    Integer create(String firstName,
-                       String lastName,
-                       String cpf,
-                       String email,
-                       Integer folder,
-                       String receipt,
-                       Date receiptIssueDate,
-                       String address,
-                       String district,
-                       String city,
-                       String state,
-                       String country,
-                       String cep,
-                       String notes) throws PsBadRequestException;
+    Integer create(Process process) throws PsBadRequestException;
 
-    void update(Integer processId,
-                       String firstName,
-                       String lastName,
-                       String cpf,
-                       String email,
-                       Integer folder,
-                       String receipt,
-                       String receiptIssueDate,
-                       String address,
-                       String district,
-                       String city,
-                       String state,
-                       String country,
-                       String cep,
-                       String notes) throws PsBadRequestException;
+    void update(Integer processId, Process process) throws PsBadRequestException;
 
     void delete(Integer processId) throws PsResourceNotFoundException;
 
