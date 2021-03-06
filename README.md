@@ -8,7 +8,7 @@ It's just a test project that i'm developing to learn Java Spring Framework.
 - To run this project you'll need docker installed because the api uses a postgres container to
 persist data.
 
-## Installation
+## Setup & Installation
 
 Running in development mode:
 
@@ -55,12 +55,12 @@ psql -U postgres --file processstorage_db.sql
 
 #### Body
 
-```json
+```
 {
-  "firstName": "user", // varchar(24)
-  "lastName": "user", // varchar(48)
-  "email": "user@domain.com", // varchar(64)
-  "password": "password" // varchar(64)
+  "firstName": "user",
+  "lastName": "user",
+  "email": "user@domain.com",
+  "password": "password"
 }
 ```
 
@@ -72,10 +72,10 @@ psql -U postgres --file processstorage_db.sql
 
 #### Body
 
-```json
+```
 {
-  "email": "user@domain.com", // varchar(64)
-  "password": "password" // varchar(64)
+  "email": "user@domain.com",
+  "password": "password"
 }
 ```
 
@@ -91,22 +91,22 @@ psql -U postgres --file processstorage_db.sql
 
 #### Body
 
-```json
+```
 {
-    "firstName": "user", // varchar(24)
-    "lastName": "user", // varchar(48)
-    "cpf": "111.111.111-11", // varchar(24)
-    "email": "user@domain.com", // varchar(64)
-    "folder": 1, // integer
-    "receipt": "1111111111", // varchar(96)
-    "receiptIssueDate": "1111-11-11", // sql date
-    "address": "adress", // varchar(96)
-    "district": "district", // varchar(24)
-    "city": "city", // varchar(24)
-    "state": "state", // varchar(24)
-    "country": "country", // varchar(24)
-    "cep": "11111-111", // varchar(24)
-    "notes": "notes notes notes notes notes" // varchar(4096)
+    "firstName": "user",
+    "lastName": "user",
+    "cpf": "111.111.111-11",
+    "email": "user@domain.com",
+    "folder": 1,
+    "receipt": "1111111111",
+    "receiptIssueDate": "1111-11-11",
+    "address": "adress",
+    "district": "district",
+    "city": "city",
+    "state": "state",
+    "country": "country",
+    "cep": "11111-111",
+    "notes": "notes notes notes notes notes"
 }
 ```
 
@@ -142,22 +142,22 @@ psql -U postgres --file processstorage_db.sql
 
 #### Body
 
-```json
+```
 {
-    "firstName": "updatedUser", // varchar(24)
-    "lastName": "updatedUser", // varchar(48)
-    "cpf": "111.111.111-11", // varchar(24)
-    "email": "updatedUser@domain.com", // varchar(64)
-    "folder": 1, // integer
-    "receipt": "1111111111", // varchar(96)
-    "receiptIssueDate": "1111-11-11", // sql date
-    "address": "updatedAdress", // varchar(96)
-    "district": "updatedDistrict", // varchar(24)
-    "city": "updatedCity", // varchar(24)
-    "state": "updatedState", // varchar(24)
-    "country": "updatedCountry", // varchar(24)
-    "cep": "11111-111", // varchar(24)
-    "notes": "updatedNotes notes notes notes notes" // varchar(4096)
+    "firstName": "updatedUser",
+    "lastName": "updatedUser", 
+    "cpf": "111.111.111-11",
+    "email": "updatedUser@domain.com",
+    "folder": 1,
+    "receipt": "1111111111",
+    "receiptIssueDate": "1111-11-11",
+    "address": "updatedAdress",
+    "district": "updatedDistrict",
+    "city": "updatedCity",
+    "state": "updatedState",
+    "country": "updatedCountry",
+    "cep": "11111-111",
+    "notes": "updatedNotes notes notes notes notes"
 }
 ```
 
